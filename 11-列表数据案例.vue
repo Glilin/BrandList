@@ -2,9 +2,9 @@
   <div id="app">
     <div class="add">
       编号:
-      <input type="text" v-model=" brandObj.id" ref="bid" v-myfocus />
+      <input type="text" v-model=" brandObj.id" v-myfocus v-setcolor="'blue'" />
       品牌名称:
-      <input type="text" v-model="brandObj.name" @keyup.enter="add" />
+      <input type="text" v-model="brandObj.name" @keyup.enter="add" v-setcolor="'red'" />
       <!-- click简写 @   设置回车添加数据  @keyup.enter="事件" -->
       <input type="button" value="添加" @click="add" />
     </div>
@@ -83,6 +83,11 @@ export default {
     myfocus: {
       inserted(el) {
         el.focus();
+      }
+    },
+    setcolor: {
+      inserted(el, binding) {
+        el.style.color = binding.value;
       }
     }
   }
