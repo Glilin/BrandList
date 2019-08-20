@@ -2,7 +2,7 @@
   <div id="app">
     <div class="add">
       编号:
-      <input type="text" v-model=" brandObj.id" />
+      <input type="text" v-model=" brandObj.id" ref="bid" />
       品牌名称:
       <input type="text" v-model="brandObj.name" @keyup.enter="add" />
       <!-- click简写 @   设置回车添加数据  @keyup.enter="事件" -->
@@ -75,6 +75,9 @@ export default {
     del(index) {
       this.brandList.splice(index, 1);
     }
+  },
+  mounted() {
+    this.$refs.bid.focus();
   }
 };
 </script>
