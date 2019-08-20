@@ -22,10 +22,16 @@
           <th>创立时间</th>
           <th>操作</th>
         </tr>
-        <tr v-for="item in  brandLsit " :key="item.id">
+        <tr v-for="(item,index) in   brandLsit " :key="item.id">
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.ctime}}</td>
+
+          <td>
+            <a href="#" @click.prevent="del(index)">删除</a>
+          </td>
+        </tr>
+        <tr>
           <td colspan="4">没有品牌数据</td>
         </tr>
         <!-- 动态生成内容tr -->
@@ -63,6 +69,10 @@ export default {
     // 新增数据
     add() {
       this.brandLsit.push({ ...this.brandObj });
+    },
+    // 删除数据
+    del(index) {
+      this.brandLsit.splice(index, 1);
     }
   }
 };
