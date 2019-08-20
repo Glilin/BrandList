@@ -21,7 +21,10 @@
           <th>创立时间</th>
           <th>操作</th>
         </tr>
-        <tr>
+        <tr v-for="item in  brandList " :key="item.id">
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.ctime}}</td>
           <td colspan="4">没有品牌数据</td>
         </tr>
         <!-- 动态生成内容tr -->
@@ -31,7 +34,25 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      // 实现动态数据渲染 ： 1 先模拟数据  2 v-for与：key拿数据实现渲染
+      brandList: [
+        {
+          id: 1,
+          name: "宝马X7",
+          ctime: new Date()
+        },
+        {
+          id: 2,
+          name: "马自达8",
+          ctime: new Date()
+        }
+      ]
+    };
+  }
+};
 </script>
 
 <style lang="less" scoped>
