@@ -22,7 +22,7 @@
           <th>创立时间</th>
           <th>操作</th>
         </tr>
-        <tr v-for="(item,index) in   brandLsit " :key="item.id">
+        <tr v-for="(item,index) in   brandList " :key="item.id">
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.ctime}}</td>
@@ -32,7 +32,8 @@
           </td>
         </tr>
         <tr>
-          <td colspan="4">没有品牌数据</td>
+          <!-- colspan 合并单元格  v-show 显示与隐藏 -->
+          <td colspan="4" v-show="brandList.length == 0 ">没有任何数据</td>
         </tr>
         <!-- 动态生成内容tr -->
       </table>
@@ -51,7 +52,7 @@ export default {
         ctime: new Date()
       },
       // 实现数据动态渲染 1 模拟一组数据  2 v-for与：key 拿属性  {{}} 取数据
-      brandLsit: [
+      brandList: [
         {
           id: 1,
           name: "宝马88",
@@ -68,11 +69,11 @@ export default {
   methods: {
     // 新增数据
     add() {
-      this.brandLsit.push({ ...this.brandObj });
+      this.brandList.push({ ...this.brandObj });
     },
     // 删除数据
     del(index) {
-      this.brandLsit.splice(index, 1);
+      this.brandList.splice(index, 1);
     }
   }
 };
