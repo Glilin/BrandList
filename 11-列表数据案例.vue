@@ -2,7 +2,7 @@
   <div id="app">
     <div class="add">
       编号:
-      <input type="text" v-model=" brandObj.id" ref="bid" />
+      <input type="text" v-model=" brandObj.id" ref="bid" v-myfocus />
       品牌名称:
       <input type="text" v-model="brandObj.name" @keyup.enter="add" />
       <!-- click简写 @   设置回车添加数据  @keyup.enter="事件" -->
@@ -77,7 +77,14 @@ export default {
     }
   },
   mounted() {
-    this.$refs.bid.focus();
+    // this.$refs.bid.focus();
+  },
+  directives: {
+    myfocus: {
+      inserted(el) {
+        el.focus();
+      }
+    }
   }
 };
 </script>
