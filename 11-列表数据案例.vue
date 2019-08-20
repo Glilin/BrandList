@@ -2,10 +2,11 @@
   <div id="app">
     <div class="add">
       编号:
-      <input type="text" />
+      <input type="text" v-model=" brandObj.id" />
       品牌名称:
-      <input type="text" />
-      <input type="button" value="添加" />
+      <input type="text" v-model="brandObj.name" @keyup.enter="add" />
+      <!-- click简写 @   设置回车添加数据  @keyup.enter="事件" -->
+      <input type="button" value="添加" @click="add" />
     </div>
 
     <div class="add">
@@ -21,7 +22,7 @@
           <th>创立时间</th>
           <th>操作</th>
         </tr>
-        <tr v-for="item in  brandList " :key="item.id">
+        <tr v-for="item in  brandLsit " :key="item.id">
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.ctime}}</td>
@@ -37,20 +38,32 @@
 export default {
   data() {
     return {
-      // 实现动态数据渲染 ： 1 先模拟数据  2 v-for与：key拿数据实现渲染
-      brandList: [
+      // 实现数据新增 定义数据对象   2 双向数据绑定  3 事件绑定
+      brandObj: {
+        id: "",
+        name: "",
+        ctime: new Date()
+      },
+      // 实现数据动态渲染 1 模拟一组数据  2 v-for与：key 拿属性  {{}} 取数据
+      brandLsit: [
         {
           id: 1,
-          name: "宝马X7",
+          name: "宝马88",
           ctime: new Date()
         },
         {
           id: 2,
-          name: "马自达8",
+          name: "马自达1",
           ctime: new Date()
         }
       ]
     };
+  },
+  methods: {
+    // 新增数据
+    add() {
+      this.brandLsit.push({ ...this.brandObj });
+    }
   }
 };
 </script>
@@ -82,3 +95,4 @@ export default {
   margin-bottom: 10px;
 }
 </style>
+  
