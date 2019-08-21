@@ -11,7 +11,7 @@
 
     <div class="add">
       品牌名称:
-      <input type="text" placeholder="请输入搜索条件" />
+      <input type="text" placeholder="请输入搜索条件" v-model="userKey" />
     </div>
 
     <div>
@@ -22,7 +22,7 @@
           <th>创立时间</th>
           <th>操作</th>
         </tr>
-        <tr v-for="(item,index) in   brandList " :key="item.id">
+        <tr v-for="(item,index) in  search " :key="item.id">
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <!-- 使用过滤器，添加管道符 （手动传参） -->
@@ -46,6 +46,8 @@
 export default {
   data() {
     return {
+      // 定义搜索关键字
+      userKey: "",
       // 实现数据新增 定义数据对象   2 双向数据绑定  3 事件绑定
       brandObj: {
         id: "",
@@ -107,6 +109,18 @@ export default {
       var mm = date.getMinutes();
       var s = date.getSeconds();
       return year + spe + m + spe + d + " " + h + spe3 + mm + spe3 + s;
+    }
+  },
+  // computed 计算属性  1 定义用户关键字  2 定义搜索关键字 3 添加计算属性返回计算结果
+  computed: {
+    search() {
+      var temp = [];
+      for (var i = 0; i < this.brandList.length; i++) {
+        if (this.brandList[i].name.indexOf(this.userKey) !== -1) {
+          temp.push(this.brandList[i]);
+        }
+      }
+      return temp;
     }
   }
 };
