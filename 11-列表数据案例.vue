@@ -25,7 +25,8 @@
         <tr v-for="(item,index) in   brandList " :key="item.id">
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
-          <td>{{item.ctime}}</td>
+          <!-- 使用过滤器，添加管道符 （手动传参） -->
+          <td>{{item.ctime | timeFormat('/','-')}}</td>
 
           <td>
             <a href="#" @click.prevent="del(index)">删除</a>
@@ -79,16 +80,33 @@ export default {
   mounted() {
     // this.$refs.bid.focus();
   },
+  // 自定义 无参指令 el:就是指绑定当前元素
   directives: {
     myfocus: {
       inserted(el) {
         el.focus();
       }
     },
+    // 自定义  有参指令 binding是一个对象 包含了当前指令的值
     setcolor: {
       inserted(el, binding) {
         el.style.color = binding.value;
       }
+    }
+  },
+  // 创建局部过滤器  filters
+  filters: {
+    // 实现日期格式化数据
+    timeFormat: (data, spe, spe3) => {
+      // 为什么还要写下面这句
+      var date = new Date(data);
+      var year = date.getFullYear();
+      var m = date.getMonth() + 1;
+      var d = date.getDate();
+      var h = date.getHours();
+      var mm = date.getMinutes();
+      var s = date.getSeconds();
+      return year + spe + m + spe + d + " " + h + spe3 + mm + spe3 + s;
     }
   }
 };
