@@ -34,7 +34,7 @@
         </tr>
         <tr>
           <!-- colspan 合并单元格  v-show 显示与隐藏 -->
-          <td colspan="4" v-show="brandList.length == 0 ">没有任何数据</td>
+          <td colspan="4" v-show="search.length == 0 ">没有任何数据</td>
         </tr>
         <!-- 动态生成内容tr -->
       </table>
@@ -114,13 +114,19 @@ export default {
   // computed 计算属性  1 定义用户关键字  2 定义搜索关键字 3 添加计算属性返回计算结果
   computed: {
     search() {
-      var temp = [];
-      for (var i = 0; i < this.brandList.length; i++) {
-        if (this.brandList[i].name.indexOf(this.userKey) !== -1) {
-          temp.push(this.brandList[i]);
-        }
-      }
-      return temp;
+      // 方法一  
+      // var temp = [];
+      // for (var i = 0; i < this.brandList.length; i++) {
+      //   if (this.brandList[i].name.indexOf(this.userKey) !== -1) {
+      //     temp.push(this.brandList[i]);
+      //   }
+      // }
+      // return temp;
+      
+      // 方法二   封装computed计算属性   推荐使用这种 filter参数调用时用() 
+      return this.brandList.filter((value)=>{
+      return value.name.indexOf(this.userKey) !=-1
+      })
     }
   }
 };
