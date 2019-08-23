@@ -14,6 +14,7 @@ export default {
       axios
         .get("http://127.0.0.1:3000/getAllCateList") //返回一个promise
         .then(res => {
+          console.log(8888)
           console.log(res);
         })
         .catch(err => {
